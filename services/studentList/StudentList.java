@@ -6,22 +6,55 @@ import java.util.List;
 import model.student.Student;
 
 public class StudentList implements Cloneable {
-    private List<Student> studentsInfo = new ArrayList<>();
+    private List<Student> studentsInfo;
+    private boolean yes;
+
+    public StudentList() {
+        this.studentsInfo = new ArrayList<>();
+    }
+
+    // getter
+    public Student getStudent(String id) {
+        for (Student std : studentsInfo) {
+            if (std.getId().equalsIgnoreCase(id)) {
+                return std;
+            }
+        }
+        return null;
+    }
 
     // Method to add a new Student
     public void addItem(Student student) {
-        studentsInfo.add(student);
+
+        yes = false;
+        for (Student stud : studentsInfo) {
+            if (stud.getId().equalsIgnoreCase(student.getId())) {
+                yes = true;
+                break;
+            }
+        }
+        if (!yes) {
+            studentsInfo.add(student);
+        } else {
+            System.out.println("Student already exists in the list");
+        }
     }
 
     // Method to remove Student
     public void removeItem(String seat_no) {
+
+        yes = false;
         for (Student stud : studentsInfo) {
-            if (stud.getId().equals(seat_no)) {
+            if (stud.getId().equalsIgnoreCase(seat_no)) {
                 studentsInfo.remove(stud);
+                yes = true;
                 break;
-            } else {
-                System.out.println("Student doesn't exist");
             }
+        }
+        if (yes) {
+            System.out.println("Student removed successfully");
+        } else {
+            System.out.println("Student doesn't exist");
         }
     }
 
@@ -36,15 +69,13 @@ public class StudentList implements Cloneable {
     }
 
     // Method for searching student acc. to there roll no.
-    public void search(String seat_no) {
+    public Student search(String seat_no) {
         for (Student stud : studentsInfo) {
-            if (stud.getId().equals(seat_no)) {
-                System.out.println(stud);
-                break;
-            } else {
-                continue;
+            if (stud.getId().equalsIgnoreCase(seat_no)) {
+                return stud;
             }
         }
+        return null;
     }
 
     @Override
@@ -59,7 +90,10 @@ public class StudentList implements Cloneable {
 
     public Object clone() throws CloneNotSupportedException {
         StudentList std = new StudentList();
-        std.studentsInfo = new ArrayList<>(this.studentsInfo);
+        std.studentsInfo = new ArrayList<>();
+        for (Student stud : this.studentsInfo) {
+            std.studentsInfo.add(new Student(stud));
+        }
         return std;
     }
 }

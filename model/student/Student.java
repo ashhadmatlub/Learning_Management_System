@@ -14,6 +14,13 @@ public class Student implements Cloneable {
         this.year = year;
     }
 
+    public Student(Student other) {
+        this.name = other.name;
+        this.id = other.id;
+        this.field = other.field;
+        this.year = other.year;
+    }
+
     // setters and getters
     public void setName(String name) {
         this.name = name;
