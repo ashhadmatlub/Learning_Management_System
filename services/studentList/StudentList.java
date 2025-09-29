@@ -62,9 +62,9 @@ public class StudentList implements Cloneable {
     public void sort() {
         studentsInfo.sort((s1, s2) -> {
 
-            int num1 = Integer.parseInt(s1.getId().replaceAll("\\D", ""));
-            int num2 = Integer.parseInt(s2.getId().replaceAll("\\D", ""));
-            return Integer.compare(num1, num2);
+            Long num1 = Long.parseLong(s1.getId().replaceAll("\\D", ""));
+            Long num2 = Long.parseLong(s2.getId().replaceAll("\\D", ""));
+            return Long.compare(num1, num2);
         });
     }
 

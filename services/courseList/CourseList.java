@@ -68,10 +68,29 @@ public class CourseList {
     // Mehtod to sort the data
     public void sort() {
         courseData.sort((c1, c2) -> {
-            int num1 = Integer.parseInt(c1.getCode().replaceAll("\\D", ""));
-            int num2 = Integer.parseInt(c2.getCode().replaceAll("\\D", ""));
+            Long num1 = Long.parseLong(c1.getCode().replaceAll("\\D", ""));
+            Long num2 = Long.parseLong(c2.getCode().replaceAll("\\D", ""));
 
-            return Integer.compare(num1, num2);
+            return Long.compare(num1, num2);
         });
+    }
+
+    // toString
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Course cs : courseData) {
+            sb.append(cs.toString()).append("\n");
+        }
+        return sb.toString();
+    }
+
+    // Copy
+    public Object clone() throws CloneNotSupportedException {
+        CourseList course = new CourseList();
+        course.courseData = new ArrayList<>();
+        for (Course cs : this.courseData) {
+            course.courseData.add(new Course(cs));
+        }
+        return course;
     }
 }

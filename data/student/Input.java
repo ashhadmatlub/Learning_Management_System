@@ -56,4 +56,8 @@ public class Input {
         id = sc.nextLine();
         stud.removeItem(id);
     }
+
+    public void display() {
+        stud.toString();
+    }
 }
