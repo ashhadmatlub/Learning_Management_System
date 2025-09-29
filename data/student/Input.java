@@ -47,7 +47,13 @@ public class Input {
 
     public void search() {
         System.out.println("Enter the I'd of the student");
-        id = sc.nextLine(); // input
+        id = sc.nextLine();
         stud.search(id);
+    }
+
+    public void remove() {
+        System.out.println("Enter the I'd of the student");
+        id = sc.nextLine();
+        stud.removeItem(id);
     }
 }
